@@ -22,6 +22,7 @@ export default function Layout() {
       <aside className="w-56 flex-shrink-0 bg-[var(--bg-card)] border-r border-[var(--border)] flex flex-col">
         <div className="p-5 border-b border-[var(--border)]">
           <Link to="/dashboard" className="flex items-center gap-2">
+            <img src="/stacktrail-logo.png" alt="" className="h-8 w-8 rounded-lg object-contain shrink-0" />
             <span className="text-xl font-semibold tracking-tight text-teal-400">StackTrail</span>
           </Link>
           <p className="text-xs text-slate-400 mt-1">Cyber Checkup</p>

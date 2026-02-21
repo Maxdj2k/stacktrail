@@ -4,9 +4,12 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0c1222] via-[#131d33] to-[#0c1222] text-white flex flex-col items-center justify-center px-6 relative">
       <div className="max-w-2xl text-center relative z-10">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-teal-400 mb-4 drop-shadow-[0_0_20px_rgba(45,212,191,0.2)]">
-          StackTrail
-        </h1>
+        <div className="flex items-center justify-center gap-4 mb-4">
+          <img src="/stacktrail-logo.png" alt="" className="h-14 w-14 md:h-16 md:w-16 rounded-xl object-contain drop-shadow-[0_0_20px_rgba(45,212,191,0.2)]" />
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-teal-400 drop-shadow-[0_0_20px_rgba(45,212,191,0.2)]">
+            StackTrail
+          </h1>
+        </div>
         <p className="text-xl text-slate-300 mb-2">
           Cyber health for small businesses
         </p>

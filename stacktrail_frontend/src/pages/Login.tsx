@@ -33,8 +33,13 @@ export default function Login() {
     <div className="min-h-screen bg-[var(--bg-base)] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-8 shadow-xl">
-          <h1 className="text-2xl font-semibold text-white mb-2">Sign in</h1>
-          <p className="text-slate-400 text-sm mb-6">StackTrail Cyber Checkup</p>
+          <div className="flex items-center gap-3 mb-6">
+            <img src="/stacktrail-logo.png" alt="" className="h-10 w-10 rounded-lg object-contain shrink-0" />
+            <div>
+              <h1 className="text-2xl font-semibold text-white">Sign in</h1>
+              <p className="text-slate-400 text-sm">StackTrail Cyber Checkup</p>
+            </div>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="text-sm text-red-300 bg-red-500/10 border border-red-500/30 px-3 py-2 rounded-lg">{error}</div>
