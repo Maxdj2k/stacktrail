@@ -15,8 +15,9 @@ if env_file.exists():
     load_dotenv(env_file)
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "insecure-dev-key-change-in-production")
-DEBUG = True
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "*"]
+DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
+_allowed = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").strip()
+ALLOWED_HOSTS = [h.strip() for h in _allowed.split(",") if h.strip()] or ["localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -61,7 +62,10 @@ TEMPLATES = [
     },
 ]
 
-if os.environ.get("USE_POSTGRES"):
+if os.environ.get("DATABASE_URL"):
+    import dj_database_url
+    DATABASES = {"default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)}
+elif os.environ.get("USE_POSTGRES"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -101,4 +105,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
-CORS_ALLOW_ALL_ORIGINS = True  # dev only
+_cors = os.environ.get("CORS_ALLOWED_ORIGINS", "").strip()
+if _cors:
+    CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors.split(",") if o.strip()]
+else:
+    CORS_ALLOW_ALL_ORIGINS = True  # dev only; set CORS_ALLOWED_ORIGINS in production

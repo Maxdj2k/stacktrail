@@ -4,6 +4,7 @@ import { useAuth } from '@/auth'
 const nav = [
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/orgs', label: 'Organizations' },
+  { to: '/settings/apis', label: 'Settings › APIs' },
 ]
 
 export default function Layout() {
@@ -25,7 +26,7 @@ export default function Layout() {
           </Link>
           <p className="text-xs text-slate-400 mt-1">Cyber Checkup</p>
         </div>
-        <nav className="flex-1 p-3 space-y-0.5">
+        <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto min-h-0">
           {nav.map(({ to, label }) => (
             <Link
               key={to}

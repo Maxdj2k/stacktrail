@@ -1,0 +1,33 @@
+# StackTrail API – Render Blueprint (split deploy with api.stacktrail.org)
+# Use with repo root; set Blueprint path to stacktrail_backend/render.yaml when creating.
+# Add OPENAI_API_KEY and optionally customize ALLOWED_HOSTS in the dashboard.
+
+databases:
+  - name: stacktrail-db
+    databaseName: stacktrail
+    plan: free
+
+services:
+  - type: web
+    runtime: python
+    name: stacktrail-api
+    rootDir: stacktrail_backend
+    buildCommand: pip install -r requirements.txt
+    preDeployCommand: python manage.py migrate --noinput
+    startCommand: gunicorn guardrail.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stacktrail-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "0"
+      # Set in dashboard to: api.stacktrail.org,<your-service>.onrender.com
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://stacktrail.org,https://www.stacktrail.org"
+      - key: OPENAI_API_KEY
+        sync: false

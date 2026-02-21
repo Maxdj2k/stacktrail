@@ -11,6 +11,7 @@ import OrgNew from '@/pages/OrgNew'
 import OrgDetail from '@/pages/OrgDetail'
 import CheckupWizard from '@/pages/CheckupWizard'
 import AssessmentResults from '@/pages/AssessmentResults'
+import SettingsAPIs from '@/pages/SettingsAPIs'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="orgs/:id" element={<OrgDetail />} />
             <Route path="orgs/:id/checkup" element={<CheckupWizard />} />
             <Route path="assessments/:id" element={<AssessmentResults />} />
+            <Route path="settings/apis" element={<SettingsAPIs />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
