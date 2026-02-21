@@ -63,6 +63,10 @@ App runs at **http://localhost:5173/** (or the port Vite shows). Set the API bas
 
 In an org’s detail page, expand **Trello (Suggestions)** and add your Trello API key, token, and the **Suggestions list ID** from your board. Cards created from the checklist or “Run workflow” will be added to that list.
 
+## Deploying (stacktrail.org)
+
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** for putting the app on your domain: one-server (VPS + Nginx) or split (e.g. Vercel + Render).
+
 ## License
 
 MIT (or your choice).
