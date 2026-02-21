@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+@import "tailwindcss";
+
+@source "./**/*.{js,ts,jsx,tsx}";
+
+:root {
+  --bg-base: #0c1222;
+  --bg-card: #131d33;
+  --bg-elevated: #1a2744;
+  --border: #2d3a52;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent: #2dd4bf;
+  --accent-glow: rgba(45, 212, 191, 0.15);
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
+  background-color: var(--bg-base);
+  min-height: 100vh;
+}
+
+input, textarea, select {
+  background-color: var(--bg-elevated);
+  border-color: var(--border);
+  color: var(--text);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
