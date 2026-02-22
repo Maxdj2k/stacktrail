@@ -152,3 +152,6 @@ If the login form does nothing (no error, no redirect):
    - One string, comma-separated, e.g. `https://stacktrail.org,https://www.stacktrail.org,https://stacktrail-xxxx.vercel.app`
 3. In the browser: DevTools → Network → try login; check the request URL (should be your Render URL) and response (CORS or 4xx/5xx).
 4. **405 on api/auth/login:** The request is hitting Vercel (same origin), not Render. Set **VITE_API_BASE** in Vercel to your Render URL, then **redeploy** (env vars are applied at build time).
+5. **Preflight CORS still fails (No Access-Control-Allow-Origin):**
+   - **Render free tier cold start:** The first request (OPTIONS) may hit Render’s “starting” response before Django runs; that response has no CORS headers. Open the API URL in a tab, wait 30–60 seconds for the service to wake, then try login again.
+   - **Temporary debug:** In Render → stacktrail-api → Environment, add **CORS_ALLOW_ALL_ORIGINS** = **1**. Redeploy. If login then works, the issue was **CORS_ALLOWED_ORIGINS** (typo, spaces, or wrong value). Remove **CORS_ALLOW_ALL_ORIGINS** and fix **CORS_ALLOWED_ORIGINS** (e.g. `https://stacktrail.org,https://www.stacktrail.org`). If login still fails, the request isn’t reaching Django (cold start or proxy); wait for the service to be up and retry.

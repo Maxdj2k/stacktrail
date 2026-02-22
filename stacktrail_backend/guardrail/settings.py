@@ -105,8 +105,13 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
+_cors_allow_all = os.environ.get("CORS_ALLOW_ALL_ORIGINS", "").strip().lower() in ("1", "true", "yes")
 _cors = os.environ.get("CORS_ALLOWED_ORIGINS", "").strip()
-if _cors:
+if _cors_allow_all:
+    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
+    CORS_ALLOW_HEADERS = ["accept", "authorization", "content-type", "origin"]
+elif _cors:
     CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors.split(",") if o.strip()]
     CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
     CORS_ALLOW_HEADERS = ["accept", "authorization", "content-type", "origin"]
