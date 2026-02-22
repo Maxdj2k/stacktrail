@@ -28,10 +28,10 @@ export default function OrgList() {
   if (loading) {
     return (
       <div className="p-8">
-        <div className="animate-pulse h-8 bg-slate-700 rounded w-48" />
+        <div className="animate-pulse h-8 bg-[var(--bg-card)] rounded w-48" />
         <div className="mt-6 space-y-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-16 bg-slate-800 rounded-lg" />
+            <div key={i} className="h-16 bg-[var(--bg-card)] rounded-[var(--radius-md)]" />
           ))}
         </div>
       </div>
@@ -41,50 +41,50 @@ export default function OrgList() {
   if (error) {
     return (
       <div className="p-8">
-        <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg">{error}</div>
+        <div className="bg-[var(--accent-red)]/10 border border-[var(--accent-red)]/30 text-[var(--accent-red)] px-4 py-3 rounded-[var(--radius-md)]">{error}</div>
       </div>
     )
   }
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-8 flex flex-col gap-8">
+      <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-semibold text-white">Organizations</h1>
-          <p className="text-slate-400 mt-1">Manage business profiles and run checkups</p>
+          <h1 className="text-2xl font-semibold text-[var(--text-primary)] tracking-tight">Organizations</h1>
+          <p className="text-[13px] text-[var(--text-secondary)] mt-1">Manage business profiles and run checkups</p>
         </div>
         <Link
           to="/orgs/new"
-          className="px-4 py-2 bg-teal-500 text-slate-900 rounded-lg font-medium hover:bg-teal-400 transition-colors"
+          className="px-5 py-2.5 bg-[var(--accent-blue)] text-white rounded-[var(--radius-pill)] font-medium hover:opacity-90 transition-colors text-sm"
         >
           Add organization
         </Link>
       </div>
 
-      <div className="bg-slate-800/80 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-[var(--bg-card)] rounded-[var(--radius-lg)] overflow-hidden">
         <table className="w-full">
-          <thead className="bg-slate-800 border-b border-slate-700">
+          <thead className="bg-[var(--bg-card-hover)] border-b border-[#1a1a1a]">
             <tr>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-400">Name</th>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-400">Domain</th>
-              <th className="text-left px-6 py-3 text-sm font-medium text-slate-400">Type</th>
-              <th className="text-right px-6 py-3 text-sm font-medium text-slate-400">Actions</th>
+              <th className="text-left px-5 py-3 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wide">Name</th>
+              <th className="text-left px-5 py-3 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wide">Domain</th>
+              <th className="text-left px-5 py-3 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wide">Type</th>
+              <th className="text-right px-5 py-3 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wide">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-700">
+          <tbody className="divide-y divide-[#1a1a1a]">
             {orgs.map((org) => (
-              <tr key={org.id} className="hover:bg-slate-700/30">
-                <td className="px-6 py-4">
-                  <Link to={`/orgs/${org.id}`} className="font-medium text-white hover:text-teal-400">
+              <tr key={org.id} className="hover:bg-[var(--bg-card-hover)] transition-colors">
+                <td className="px-5 py-4">
+                  <Link to={`/orgs/${org.id}`} className="font-medium text-[var(--text-primary)] hover:text-[var(--accent-blue)]">
                     {org.name}
                   </Link>
                 </td>
-                <td className="px-6 py-4 text-slate-400">{org.primary_domain || '—'}</td>
-                <td className="px-6 py-4 text-slate-400 capitalize">{org.business_type?.replace('_', ' ')}</td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-5 py-4 text-[var(--text-secondary)] text-[13px]">{org.primary_domain || '—'}</td>
+                <td className="px-5 py-4 text-[var(--text-secondary)] text-[13px] capitalize">{org.business_type?.replace('_', ' ')}</td>
+                <td className="px-5 py-4 text-right">
                   <Link
                     to={`/orgs/${org.id}/checkup`}
-                    className="text-sm font-medium text-teal-400 hover:underline"
+                    className="text-sm font-medium text-[var(--accent-blue)] hover:underline"
                   >
                     Run checkup
                   </Link>
@@ -94,13 +94,13 @@ export default function OrgList() {
           </tbody>
         </table>
         {orgs.length === 0 && !loading && (
-          <div className="px-6 py-12 text-center">
-            <p className="text-slate-400">No organizations.</p>
+          <div className="px-5 py-12 text-center">
+            <p className="text-[var(--text-secondary)]">No organizations.</p>
             <div className="mt-3 flex gap-3 justify-center">
-              <button type="button" onClick={handleSeedDemo} disabled={seeding} className="px-4 py-2 bg-teal-500 text-slate-900 rounded-lg hover:bg-teal-400 disabled:opacity-50 font-medium">
+              <button type="button" onClick={handleSeedDemo} disabled={seeding} className="px-5 py-2.5 bg-[var(--accent-blue)] text-white rounded-[var(--radius-pill)] hover:opacity-90 disabled:opacity-50 font-medium text-sm">
                 {seeding ? 'Loading…' : 'Load demo organizations'}
               </button>
-              <Link to="/orgs/new" className="px-4 py-2 border border-slate-600 rounded-lg text-slate-300 hover:bg-slate-700/50 font-medium">Add my own</Link>
+              <Link to="/orgs/new" className="px-5 py-2.5 bg-[var(--bg-input)] text-[var(--text-primary)] rounded-[var(--radius-pill)] hover:bg-[var(--bg-card-hover)] font-medium text-sm border border-[#333]">Add my own</Link>
             </div>
           </div>
         )}

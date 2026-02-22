@@ -1,33 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
 @import "tailwindcss";
 
 @source "./**/*.{js,ts,jsx,tsx}";
 
 :root {
-  --bg-base: #0c1222;
-  --bg-card: #131d33;
-  --bg-elevated: #1a2744;
-  --border: #2d3a52;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --accent: #2dd4bf;
-  --accent-glow: rgba(45, 212, 191, 0.15);
+  --bg-app: #050505;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --bg-input: #1f1f1f;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --text-tertiary: #555555;
+  --accent-blue: #2f54eb;
+  --accent-blue-dim: rgba(47, 84, 235, 0.15);
+  --accent-green: #52c41a;
+  --accent-green-dim: #1d3312;
+  --accent-yellow: #fadb14;
+  --accent-red: #e02020;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+  --space-xs: 4px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  /* compatibility */
+  --bg-base: var(--bg-app);
+  --bg-elevated: var(--bg-input);
+  --border: #1a1a1a;
+  --text: var(--text-primary);
+  --text-muted: var(--text-secondary);
+  --accent: var(--accent-blue);
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
 }
 
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--text);
-  background-color: var(--bg-base);
+  font-size: 14px;
+  color: var(--text-primary);
+  background-color: var(--bg-app);
   min-height: 100vh;
 }
 
-input, textarea, select {
-  background-color: var(--bg-elevated);
-  border-color: var(--border);
-  color: var(--text);
+input,
+textarea,
+select {
+  background-color: var(--bg-input);
+  border: 1px solid #333;
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
 }
-input::placeholder, textarea::placeholder {
-  color: var(--text-muted);
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px var(--accent-blue-dim);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
 }

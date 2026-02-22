@@ -37,10 +37,10 @@ export default function SettingsAPIs() {
   if (loading) {
     return (
       <div className="p-8">
-        <div className="animate-pulse h-8 bg-slate-700 rounded w-48 mb-6" />
+        <div className="animate-pulse h-8 bg-[var(--bg-card)] rounded w-48 mb-6" />
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-32 bg-slate-800 rounded-xl" />
+            <div key={i} className="h-32 bg-[var(--bg-card)] rounded-[var(--radius-lg)]" />
           ))}
         </div>
       </div>
@@ -50,25 +50,25 @@ export default function SettingsAPIs() {
   if (error) {
     return (
       <div className="p-8">
-        <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg">{error}</div>
+        <div className="bg-[var(--accent-red)]/10 border border-[var(--accent-red)]/30 text-[var(--accent-red)] px-4 py-3 rounded-lg">{error}</div>
       </div>
     )
   }
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-semibold text-white mb-1">Settings › APIs</h1>
-      <p className="text-slate-400 mb-8">Connect Trello (Suggestions) per organization. Cards from checkup findings will be created in your board’s Suggestions list.</p>
+      <h1 className="text-2xl font-semibold text-[var(--text-primary)] mb-1">Settings › APIs</h1>
+      <p className="text-[var(--text-secondary)] mb-8">Connect Trello (Suggestions) per organization. Cards from checkup findings will be created in your board’s Suggestions list.</p>
 
       <div className="space-y-8">
         {orgs.map((org) => (
-          <section key={org.id} className="bg-slate-800/80 rounded-xl border border-slate-700 overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-700">
-              <h2 className="font-semibold text-white">{org.name}</h2>
-              <p className="text-sm text-slate-500 mt-0.5">{org.primary_domain || '—'}</p>
+          <section key={org.id} className="bg-[var(--bg-card)]/80 rounded-[var(--radius-lg)] border border-[#1a1a1a] overflow-hidden">
+            <div className="px-6 py-4 border-b border-[#1a1a1a]">
+              <h2 className="font-semibold text-[var(--text-primary)]">{org.name}</h2>
+              <p className="text-sm text-[var(--text-tertiary)] mt-0.5">{org.primary_domain || '—'}</p>
             </div>
             <div className="p-6">
-              <p className="text-sm font-medium text-slate-400 mb-2">Trello (Suggestions)</p>
+              <p className="text-sm font-medium text-[var(--text-secondary)] mb-2">Trello (Suggestions)</p>
               <TrelloIntegrationPanel
                 orgId={org.id}
                 integrations={integrationsByOrg[org.id] ?? []}
@@ -80,8 +80,8 @@ export default function SettingsAPIs() {
       </div>
 
       {orgs.length === 0 && (
-        <div className="bg-slate-800/80 rounded-xl border border-slate-700 p-12 text-center">
-          <p className="text-slate-400">No organizations yet. Add an organization to configure API connections.</p>
+        <div className="bg-[var(--bg-card)]/80 rounded-[var(--radius-lg)] border border-[#1a1a1a] p-12 text-center">
+          <p className="text-[var(--text-secondary)]">No organizations yet. Add an organization to configure API connections.</p>
         </div>
       )}
     </div>

@@ -32,12 +32,12 @@ export function TrelloIntegrationPanel({
 
   const trelloConnected = integrations.some((i) => i.provider === 'trello')
   return (
-    <div className="mt-3 p-4 bg-slate-800/80 rounded-xl border border-slate-700 max-w-xl">
-      <p className="text-sm text-slate-300 mb-3">
-        Connect Trello so checklist suggestions become cards in your <strong className="text-slate-200">Suggestions</strong> list (demo: retail store).
+    <div className="mt-3 p-5 bg-[var(--bg-card)] rounded-[var(--radius-lg)] border border-[#1a1a1a] max-w-xl">
+      <p className="text-sm text-[var(--text-secondary)] mb-3">
+        Connect Trello so checklist suggestions become cards in your <strong className="text-[var(--text-primary)]">Suggestions</strong> list (demo: retail store).
       </p>
       {trelloConnected && (
-        <p className="text-sm text-slate-500 mb-2">Trello connected. Add again to update API key, token, or list ID.</p>
+        <p className="text-sm text-[var(--text-tertiary)] mb-2">Trello connected. Add again to update API key, token, or list ID.</p>
       )}
       <div className="space-y-2 mb-3">
         <input
@@ -45,32 +45,32 @@ export function TrelloIntegrationPanel({
           placeholder="Trello API key"
           value={config.api_key ?? ''}
           onChange={(e) => setConfig((c) => ({ ...c, api_key: e.target.value }))}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-sm text-white placeholder:text-slate-500 focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500"
+          className="w-full px-3 py-2.5 bg-[var(--bg-input)] border border-[#333] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]"
         />
         <input
           type="password"
           placeholder="Trello token"
           value={config.token ?? ''}
           onChange={(e) => setConfig((c) => ({ ...c, token: e.target.value }))}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-sm text-white placeholder:text-slate-500 focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500"
+          className="w-full px-3 py-2.5 bg-[var(--bg-input)] border border-[#333] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]"
         />
         <input
           type="text"
           placeholder="Suggestions list ID (from your Trello board)"
           value={config.list_id ?? ''}
           onChange={(e) => setConfig((c) => ({ ...c, list_id: e.target.value }))}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-sm text-white placeholder:text-slate-500 focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500"
+          className="w-full px-3 py-2.5 bg-[var(--bg-input)] border border-[#333] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]"
         />
       </div>
       <button
         type="button"
         disabled={saving}
         onClick={save}
-        className="px-4 py-2 bg-teal-500 text-slate-900 rounded-lg text-sm font-medium hover:bg-teal-400 disabled:opacity-50"
+        className="px-5 py-2.5 bg-[var(--accent-blue)] text-white rounded-[var(--radius-pill)] text-sm font-medium hover:opacity-90 disabled:opacity-50"
       >
         {saving ? 'Connecting…' : 'Connect Trello'}
       </button>
-      {msg && <p className={`mt-2 text-sm ${msg.includes('connected') ? 'text-green-400' : 'text-red-400'}`}>{msg}</p>}
+      {msg && <p className={`mt-2 text-sm ${msg.includes('connected') ? 'text-[var(--accent-green)]' : 'text-[var(--accent-red)]'}`}>{msg}</p>}
     </div>
   )
 }
