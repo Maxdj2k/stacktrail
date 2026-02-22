@@ -137,3 +137,17 @@ Optional for custom domain later:
 | Frontend env | `VITE_API_BASE` = backend URL |
 
 After both are deployed, open your Vercel URL (or custom domain), sign in or register, and confirm the app talks to the Render API.
+
+---
+
+## Troubleshooting: Login does nothing / no error
+
+If the login form does nothing (no error, no redirect):
+
+1. **Vercel:** Set **VITE_API_BASE** (Settings → Environment Variables) to your Render backend URL, e.g. `https://stacktrail-api-xxxx.onrender.com` (no trailing slash). **Redeploy** after adding or changing it.
+2. **Render:** Set **CORS_ALLOWED_ORIGINS** (stacktrail-api → Environment) to include every origin users open:
+   - `https://stacktrail.org`
+   - `https://www.stacktrail.org`
+   - Your Vercel URL, e.g. `https://stacktrail-xxxx.vercel.app`
+   - One string, comma-separated, e.g. `https://stacktrail.org,https://www.stacktrail.org,https://stacktrail-xxxx.vercel.app`
+3. In the browser: DevTools → Network → try login; check the request URL (should be your Render URL) and response (CORS or 4xx/5xx).

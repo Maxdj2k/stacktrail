@@ -19,8 +19,17 @@ export default function Login() {
       navigate('/dashboard')
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Login failed'
-      if (msg === 'Failed to fetch') {
-        setError('Cannot reach the server. Is the backend running on port 8000?')
+      const isNetworkError =
+        msg === 'Failed to fetch' ||
+        (err && typeof (err as { name?: string }).name === 'string' && (err as { name: string }).name === 'TypeError') ||
+        /Unexpected token|JSON|fetch/.test(msg)
+      if (isNetworkError) {
+        const apiBase = (import.meta.env.VITE_API_BASE as string) || '/api'
+        setError(
+          apiBase === '/api'
+            ? 'Cannot reach the API. Set VITE_API_BASE to your backend URL in Vercel (Settings → Environment Variables), then redeploy.'
+            : 'Cannot reach the API. Check that the backend is running and CORS allows this site (add this origin to CORS_ALLOWED_ORIGINS on Render).'
+        )
       } else {
         setError(msg)
       }
