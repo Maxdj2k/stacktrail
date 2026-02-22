@@ -1,4 +1,7 @@
-const API_BASE = (import.meta.env.VITE_API_BASE as string) || '/api'
+const rawBase = (import.meta.env.VITE_API_BASE as string) || ''
+const API_BASE = rawBase
+  ? rawBase.replace(/\/$/, '').replace(/\/api\/?$/, '') + '/api'
+  : '/api'
 
 function getToken(): string | null {
   return localStorage.getItem('access')

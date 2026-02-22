@@ -85,7 +85,7 @@ Optional for custom domain later:
 1. In the project, go to **Settings** → **Environment Variables**.
 2. Add:
    - **Name:** `VITE_API_BASE`
-   - **Value:** Your Render backend URL from Part 1 (e.g. `https://stacktrail-api-xxxx.onrender.com`). No trailing slash, no `/api`.
+   - **Value:** Your Render backend URL from Part 1 (e.g. `https://stacktrail-api-xxxx.onrender.com`). The app will use `/api` for requests; you can omit or include `/api` in the value.
 3. Apply to **Production** (and **Preview** if you want preview deployments to use the same API).
 
 ### 2.4 Deploy
@@ -114,7 +114,7 @@ Optional for custom domain later:
 ### Frontend (Vercel)
 
 - [ ] **Root Directory** is `stacktrail_frontend`.
-- [ ] **Environment variable** `VITE_API_BASE` is set to the Render backend URL (no trailing slash).
+- [ ] **Environment variable** `VITE_API_BASE` is set to the Render backend URL (e.g. `https://stacktrail-api-xxxx.onrender.com`).
 
 ### DNS (if using custom domains)
 
@@ -144,10 +144,11 @@ After both are deployed, open your Vercel URL (or custom domain), sign in or reg
 
 If the login form does nothing (no error, no redirect):
 
-1. **Vercel:** Set **VITE_API_BASE** (Settings → Environment Variables) to your Render backend URL, e.g. `https://stacktrail-api-xxxx.onrender.com` (no trailing slash). **Redeploy** after adding or changing it.
+1. **Vercel:** Set **VITE_API_BASE** (Settings → Environment Variables) to your Render backend URL, e.g. `https://stacktrail-api-xxxx.onrender.com`. **Redeploy** after adding or changing it (the app will call `/api/auth/login` etc. on that host).
 2. **Render:** Set **CORS_ALLOWED_ORIGINS** (stacktrail-api → Environment) to include every origin users open:
    - `https://stacktrail.org`
    - `https://www.stacktrail.org`
    - Your Vercel URL, e.g. `https://stacktrail-xxxx.vercel.app`
    - One string, comma-separated, e.g. `https://stacktrail.org,https://www.stacktrail.org,https://stacktrail-xxxx.vercel.app`
 3. In the browser: DevTools → Network → try login; check the request URL (should be your Render URL) and response (CORS or 4xx/5xx).
+4. **405 on api/auth/login:** The request is hitting Vercel (same origin), not Render. Set **VITE_API_BASE** in Vercel to your Render URL, then **redeploy** (env vars are applied at build time).
