@@ -69,4 +69,4 @@ See **[DEPLOYMENT.md](DEPLOYMENT.md)** for putting the app on your domain: one-s
 
 ## License
 
-MIT (or your choice).
+TBD  
